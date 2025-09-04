@@ -12,7 +12,7 @@
 # from utils.common_utils import get_public_ip
 
 # from utils.common_utils import *
-# from utils.x_compute_rest_api_util import *
+# from utils.rest_api_util import *
 
 
 # def send_email(report_file, recipients):

@@ -4,19 +4,6 @@ kind: Pod
 metadata:
  name: csi-002-pod
 spec:
-  tolerations:
-    - effect: NoSchedule
-      key: "exokarpenter.sh/x-compute"
-      operator: Exists
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: exokarpenter.sh/nodepool
-            operator: In
-            values:
-            - pool-c
   containers:
   - name: csi-002-container
     image: nginx

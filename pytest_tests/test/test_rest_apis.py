@@ -4,8 +4,7 @@ import pytest
 import requests
 
 from utils.base_class import BaseClass
-from utils.x_compute_migration_util import *
-from utils.x_compute_rest_api_util import *
+from utils.rest_api_util import *
 
 parse_job_id = ""
 updateXcompute_job_id = ""

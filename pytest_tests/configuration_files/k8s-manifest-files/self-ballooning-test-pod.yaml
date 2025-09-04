@@ -5,19 +5,6 @@ metadata:
   labels:
     app: ubuntu
 spec:
-  tolerations:
-    - effect: NoSchedule
-      key: "exokarpenter.sh/x-compute"
-      operator: Exists
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: exokarpenter.sh/nodepool
-            operator: In
-            values:
-            - pool-b
   containers:
     - name: self-ballooning-test-container
       image: ubuntu

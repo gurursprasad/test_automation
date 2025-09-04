@@ -48,6 +48,6 @@ def create_jira_issue_with_attachment(server_url, username, password, project_ke
 #     DESCRIPTION = "Detailed description of the bug."
 #     ISSUE_TYPE = "Bug"
 
-#     ATTACHMENT_PATHS = ["/home/ubuntu/automated_tests/xcompute_tests/x_compute_pytest/test/report.html"]
+#     ATTACHMENT_PATHS = ["/home/ubuntu/automated_tests/xcompute_tests/pytest/test/report.html"]
 
 #     create_jira_issue_with_attachment(SERVER_URL, USERNAME, PASSWORD, PROJECT_KEY, SUMMARY, DESCRIPTION, ISSUE_TYPE, ATTACHMENT_PATHS)
