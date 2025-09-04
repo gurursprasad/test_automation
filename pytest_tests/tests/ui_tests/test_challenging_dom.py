@@ -1,6 +1,6 @@
-from coding_practice.selenium_practice.page_objects.home_page_objects import HomePageObjects
-from coding_practice.selenium_practice.utils.base_class import BaseClass
-from coding_practice.selenium_practice.page_objects.challenging_dom_objects import ChallengingDOMObjects
+from page_objects.home_page_objects import HomePageObjects
+from utils.base_class import BaseClass
+from page_objects.challenging_dom_objects import ChallengingDOMObjects
 
 class Test_ChallengingDOM(BaseClass):
     def test_challenging_dom_is_loaded(self, setup_driver):
