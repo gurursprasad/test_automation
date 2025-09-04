@@ -39,11 +39,11 @@ def create_jira_issue_with_attachment(server_url, username, password, project_ke
 
 
 # if __name__ == "__main__":
-#     SERVER_URL = "https://exostellar.atlassian.net/"
-#     USERNAME = "v-guru@exostellar.io"
+#     SERVER_URL = "https://atlassian.net/"
+#     USERNAME = "gurursprasad@gmail.com"
 #     PASSWORD = "jkfdhsjkjfds"  # Use API token instead of password for security
 
-#     PROJECT_KEY = "EXO" # id: 10004 # Exostellar Top Level
+#     PROJECT_KEY = "X" # id: 1 # X Top Level
 #     SUMMARY = "<<Automation - Example bug summary>>"
 #     DESCRIPTION = "Detailed description of the bug."
 #     ISSUE_TYPE = "Bug"
