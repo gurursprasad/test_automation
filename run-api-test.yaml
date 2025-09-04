@@ -9,7 +9,7 @@ spec:
   containers:
   - name: pytest-container
     image: 3214563657889.dkr.ecr.us-west-2.amazonaws.com/pytest:latest # Replace with your actual image
-    args: ["test_rest_apis.py"]
+    args: ["api_tests/test_rest_apis.py"]
     env:
     - name: AWS_ACCESS_KEY_ID
       valueFrom:

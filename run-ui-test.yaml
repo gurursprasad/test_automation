@@ -8,8 +8,8 @@ spec:
   restartPolicy: Never
   containers:
   - name: pytest-container
-    image: 3214563657889.dkr.ecr.us-east-2.amazonaws.com/pytest:latest
-    args: ["test_challenging_dom.py", "test_frames.py"]
+    image: 3214563657889.dkr.ecr.us-west-2.amazonaws.com/pytest:latest
+    args: ["ui_tests/test_challenging_dom.py", "ui_tests/test_frames.py"]
     env:
     - name: AWS_ACCESS_KEY_ID
       valueFrom:
