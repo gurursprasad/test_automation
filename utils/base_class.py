@@ -1,7 +1,7 @@
 import inspect
 import logging
 import os
-from test.conftest import *
+from tests.ui_tests.conftest import *
 
 from dotenv import load_dotenv
 load_dotenv()

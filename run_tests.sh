@@ -12,7 +12,7 @@ aws configure list
 # Change kubectl context
 aws eks update-kubeconfig --region "$AWS_REGION" --name "$CLUSTER_NAME"
 
-cd pytest_tests/tests/
+cd tests/
 
 if [ $# -eq 0 ]; then
     echo "No test files specified. Running pytest on all tests."

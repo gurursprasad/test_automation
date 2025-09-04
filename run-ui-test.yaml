@@ -8,7 +8,7 @@ spec:
   restartPolicy: Never
   containers:
   - name: pytest-container
-    image: 010438502665.dkr.ecr.us-east-2.amazonaws.com/pytest:latest
+    image: 3214563657889.dkr.ecr.us-east-2.amazonaws.com/pytest:latest
     args: ["test_challenging_dom.py", "test_frames.py"]
     env:
     - name: AWS_ACCESS_KEY_ID
