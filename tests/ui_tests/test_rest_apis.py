@@ -7,11 +7,11 @@ from utils.base_class import BaseClass
 from utils.rest_api_util import *
 
 parse_job_id = ""
-updateXcompute_job_id = ""
+updatecompute_job_id = ""
 node_names = []
 license_expired = False
 
-class Test_XComputeRestApis(BaseClass):
+class Test_computeRestApis(BaseClass):
 
     # profiles:
     # addProfile
@@ -313,7 +313,7 @@ class Test_XComputeRestApis(BaseClass):
             if license_expired:
                 pytest.skip("License has expired, skipping test.")
             head_node_url = setup_server_ip
-            api_url = f"http://{head_node_url}:5000/v1/license/xcompute"
+            api_url = f"http://{head_node_url}:5000/v1/license/compute"
             logger.info("API URL: " + api_url)
             headers = {"Accept": "application/json"}
             response = requests.get(api_url, headers=headers)
@@ -323,14 +323,14 @@ class Test_XComputeRestApis(BaseClass):
             assert False, str(e)
 
 
-    # xcompute:
+    # compute:
     #     createVm
     #     getVms
     #     getVmByName
     #     removeVm
 
     #     getUpdateList
-    #     updateXcompute
+    #     updatecompute
     #     getUpdateStatusByJobId
 
     #     parseVm - Need info on the parameters that are passed with the request
@@ -341,7 +341,7 @@ class Test_XComputeRestApis(BaseClass):
         try:
             logger = self.getlogger()
             head_node_url = setup_server_ip
-            api_url = f"http://{head_node_url}:5000/v1/xcompute/vm"
+            api_url = f"http://{head_node_url}:5000/v1/compute/vm"
             logger.info("API URL: " + api_url)
             headers = {"Content-Type": "application/json", "Accept": "application/json"}
             with open(build_configuration_file_path("rest-api-payloads/custImageVm.json"), "r") as f:
@@ -364,7 +364,7 @@ class Test_XComputeRestApis(BaseClass):
         global parse_job_id
         try:
             logger = self.getlogger()
-            api_url = f"http://{setup_server_ip}:5000/v1/xcompute/parse"
+            api_url = f"http://{setup_server_ip}:5000/v1/compute/parse"
             logger.info("API URL: " + api_url)
             headers = {"Content-Type": "application/json"}
             with open(build_configuration_file_path("rest-api-payloads/parseVm.json"), "r") as f:
@@ -391,7 +391,7 @@ class Test_XComputeRestApis(BaseClass):
             parse_job_id is not None
         ), "parse_job_id is not set. Hence skipping the test!!"
         head_node_url = setup_server_ip
-        api_url = f"http://{head_node_url}:5000/v1/xcompute/parse/{parse_job_id}"
+        api_url = f"http://{head_node_url}:5000/v1/compute/parse/{parse_job_id}"
         logger.info("API URL: " + api_url)
         headers = {"Accept": "application/json"}
         max_wait_time = 1200
@@ -424,7 +424,7 @@ class Test_XComputeRestApis(BaseClass):
     def test_getUpdateList_api(self, setup_server_ip):
         logger = self.getlogger()
         head_node_url = setup_server_ip
-        api_url = f"http://{head_node_url}:5000/v1/xcompute/updates"
+        api_url = f"http://{head_node_url}:5000/v1/compute/updates"
         logger.info("API URL: " + api_url)
         headers = {"Accept": "application/json"}
         try:
@@ -447,17 +447,17 @@ class Test_XComputeRestApis(BaseClass):
             assert False, f"An error occurred: {str(e)}"
 
 
-    # def test_updateXcompute_api(self, setup_server_ip):
+    # def test_updatecompute_api(self, setup_server_ip):
     #     logger = self.getlogger()
     #     head_node_url = setup_server_ip
-    #     api_url = f"http://{head_node_url}:5000/v1/xcompute/update"
+    #     api_url = f"http://{head_node_url}:5000/v1/compute/update"
     #     logger.info("API URL: " + api_url)
     #     with open(build_configuration_file_path("rest-api-payloads/updateList.json")) as update_file:
     #         update_list = json.load(update_file).get("UpdateList", [])
     #         assert update_file is not None, "Null pointer exception: 'update_file' is null"
     #     if not update_list:
     #         pytest.skip("No updates available, skipping test.")
-    #     update_data = {"XcomputeVersion": update_list[0]}
+    #     update_data = {"computeVersion": update_list[0]}
     #     headers = {"Content-Type": "application/json", "Accept": "application/json"}
     #     update_json = json.dumps(update_data)
     #     assert update_json is not None, "Null pointer exception: 'update_json' is null"
@@ -467,16 +467,16 @@ class Test_XComputeRestApis(BaseClass):
     #         response_data = response.json()
     #         assert (response_data is not None), "Null pointer exception: 'response_data' is null"
     #         assert "JobId" in response_data, "Expected JobId in response"
-    #         global updateXcompute_job_id
-    #         updateXcompute_job_id = response_data["JobId"]
+    #         global updatecompute_job_id
+    #         updatecompute_job_id = response_data["JobId"]
     #         logger.info("Response Status Code: " + str(response.status_code))
-    #         assert (updateXcompute_job_id is not None), "update_job_id is not set. Hence skipping!!"
+    #         assert (updatecompute_job_id is not None), "update_job_id is not set. Hence skipping!!"
     #     except (json.decoder.JSONDecodeError, requests.exceptions.RequestException) as e:
     #         assert False, f"An error occurred: {str(e)}"
 
 
     # def test_getUpdateStatusByJobId_api(self, setup_server_ip):
-    #     global updateXcompute_job_id
+    #     global updatecompute_job_id
     #     logger = self.getlogger()
     #     with open(build_configuration_file_path("rest-api-payloads/updateList.json")) as update_file:
     #         update_list = json.load(update_file).get("UpdateList", [])
@@ -484,7 +484,7 @@ class Test_XComputeRestApis(BaseClass):
     #     if not update_list:
     #         pytest.skip("No updates available, skipping test.")
     #     head_node_url = setup_server_ip
-    #     api_url = f"http://{head_node_url}:5000/v1/xcompute/update/{updateXcompute_job_id}"
+    #     api_url = f"http://{head_node_url}:5000/v1/compute/update/{updatecompute_job_id}"
     #     logger.info("API URL: " + api_url)
     #     headers = {"Accept": "application/json"}
     #     max_wait_time = 240  # 3 minutes
@@ -516,7 +516,7 @@ class Test_XComputeRestApis(BaseClass):
         logger = self.getlogger()
         global node_names
         head_node_url = setup_server_ip
-        api_url = f"http://{head_node_url}:5000/v1/xcompute/vms"
+        api_url = f"http://{head_node_url}:5000/v1/compute/vms"
         logger.info("API URL: " + api_url)
         headers = {"Accept": "application/json"}
         response = requests.get(api_url, headers=headers)
@@ -526,7 +526,7 @@ class Test_XComputeRestApis(BaseClass):
         try:
             for node_name in node_names:
                 if node_name == "pytest":
-                    api_url = f"http://{head_node_url}:5000/v1/xcompute/vm/{node_name}"
+                    api_url = f"http://{head_node_url}:5000/v1/compute/vm/{node_name}"
                     headers = {"Accept": "application/json"}
                     response = requests.delete(api_url, headers=headers)
                     if response is None:
@@ -616,7 +616,7 @@ class Test_XComputeRestApis(BaseClass):
     # #         head_node_url = setup_server_ip
 
     # #         for node_name in node_names:
-    # #             api_url = f"http://{head_node_url}:5000/v1/xcompute/vm/{node_name}"
+    # #             api_url = f"http://{head_node_url}:5000/v1/compute/vm/{node_name}"
     # #             headers = {"Accept": "application/json"}
 
     # #             response = requests.delete(api_url, headers=headers)
@@ -629,7 +629,7 @@ class Test_XComputeRestApis(BaseClass):
 
     # #         time.sleep(3)
     # #         for node_name in node_names:
-    # #             api_url = f"http://{head_node_url}:5000/v1/xcompute/vm/{node_name}"
+    # #             api_url = f"http://{head_node_url}:5000/v1/compute/vm/{node_name}"
     # #             headers = {"Accept": "application/json"}
 
     # #             response = requests.get(api_url, headers=headers)

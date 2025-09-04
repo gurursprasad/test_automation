@@ -7,7 +7,7 @@ from utils.common_utils import get_public_ip
 
 def get_headnode_version_info():
     head_node_url = get_public_ip()
-    api_url = f"http://{head_node_url}:5000/v1/xcompute/info"
+    api_url = f"http://{head_node_url}:5000/v1/compute/info"
     headers = {"Accept": "application/json"}
     response = requests.get(api_url, headers=headers)
     response_data = response.json()
@@ -48,6 +48,6 @@ def create_jira_issue_with_attachment(server_url, username, password, project_ke
 #     DESCRIPTION = "Detailed description of the bug."
 #     ISSUE_TYPE = "Bug"
 
-#     ATTACHMENT_PATHS = ["/home/ubuntu/automated_tests/xcompute_tests/pytest/test/report.html"]
+#     ATTACHMENT_PATHS = ["/home/ubuntu/automated_tests/compute_tests/pytest/test/report.html"]
 
 #     create_jira_issue_with_attachment(SERVER_URL, USERNAME, PASSWORD, PROJECT_KEY, SUMMARY, DESCRIPTION, ISSUE_TYPE, ATTACHMENT_PATHS)

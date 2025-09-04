@@ -13,7 +13,7 @@ on:
 env:
   AWS_REGION: us-west-2
   ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-  ECR_REPO: ${{ vars.ECR_REPO_XCOMPUTE }}
+  ECR_REPO: ${{ vars.ECR_REPO }}
   ECR_REPO_FLASKAPP: ${{ vars.ECR_REPO_FLASKAPP }}
 
 jobs:

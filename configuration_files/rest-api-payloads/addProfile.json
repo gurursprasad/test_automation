@@ -20,7 +20,7 @@
       "ImageId": "ami-06428e55389b54532"
     },
     "EnableIO": true,
-    "LogPath": "/xcompute/logs",
+    "LogPath": "/compute/logs",
     "Manufacturer": "Intel",
     "MaxControllers": 10,
     "ProfileName": "az1",
