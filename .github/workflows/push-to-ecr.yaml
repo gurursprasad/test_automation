@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: build-push-to-ecr
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+  # TODO: Broken - never works when we push to main
+  # push:
+  #   branches: [main]
+
+env:
+  AWS_REGION: us-west-2
+  ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+  ECR_REPO: ${{ vars.ECR_REPO_XCOMPUTE }}
+  ECR_REPO_FLASKAPP: ${{ vars.ECR_REPO_FLASKAPP }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    # IMAGE_TAG picks release tag on releases, or SHA on pushes
+    env:
+      IMAGE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || github.sha }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Log in to Amazon ECR
+      run: |
+        aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
+
+    - name: Build & push root Dockerfile image
+      run: |
+        # build+tag in one go with the full registry path
+        docker build \
+          -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO }}:latest \
+          .
+        docker push \
+          ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO }}:latest
+
+    - name: Build & push flask_app Dockerfile image
+      run: |
+        docker build \
+          -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_FLASKAPP }}:latest \
+          -f rt_load/flask_app/Dockerfile \
+          rt_load/flask_app
+        docker push \
+          ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_FLASKAPP }}:latest
