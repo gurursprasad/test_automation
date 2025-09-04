@@ -1,0 +1,48 @@
+# pod.yaml with multiple ephemeral volumes
+apiVersion: v1
+kind: Pod
+metadata:
+ name: csi-002-pod
+spec:
+  tolerations:
+    - effect: NoSchedule
+      key: "exokarpenter.sh/x-compute"
+      operator: Exists
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: exokarpenter.sh/nodepool
+            operator: In
+            values:
+            - pool-c
+  containers:
+  - name: csi-002-container
+    image: nginx
+    volumeMounts:
+    - name: ephemeral-volume-1
+      mountPath: /mnt/volume1
+    - name: ephemeral-volume-2
+      mountPath: /mnt/volume2
+  volumes:
+  - name: ephemeral-volume-1
+    ephemeral:  # Defines ephemeral volume for volume 1
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi  # Storage size for ephemeral volume 1
+          storageClassName: gp2
+  - name: ephemeral-volume-2
+    ephemeral:  # Defines ephemeral volume for volume 2
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi  # Storage size for ephemeral volume 2
+          storageClassName: gp2

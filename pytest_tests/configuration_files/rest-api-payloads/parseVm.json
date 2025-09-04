@@ -1,0 +1,9 @@
+{
+    "ImageId": "ami-0371ba6730d080526",
+    "Description": "Test parseVM",
+    "ImageName": "pytest-image-eTM2",
+    "UserData": "ZWNobyBIaQ==",
+    "ImageType": "qcow2",
+    "User": "",
+    "UserKeyPem": ""
+}

@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: x-compute-ui-test-pod
+  labels:
+    app: x-compute-pytest
+spec:
+  restartPolicy: Never
+  containers:
+  - name: x-compute-pytest-container
+    image: 010438502665.dkr.ecr.us-east-2.amazonaws.com/x-compute-pytest:latest
+    args: ["test_console_logs.py", "test_environment_page.py", "test_landing_page.py", "test_profiles_page.py", "test_settings_page.py", "test_vm_image_library.py"]
+    env:
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: x-compute-pytest-secrets
+          key: AWS_ACCESS_KEY_ID
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: x-compute-pytest-secrets
+          key: AWS_SECRET_ACCESS_KEY
+    - name: AWS_PARAMETER_STORE_PEM_KEY_FILE
+      valueFrom:
+        secretKeyRef:
+          name: x-compute-pytest-secrets
+          key: AWS_PARAMETER_STORE_PEM_KEY_FILE
+    - name: AWS_REGION
+      valueFrom:
+        secretKeyRef:
+          name: x-compute-pytest-secrets
+          key: AWS_REGION
+    - name: TESTMO_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: x-compute-pytest-secrets
+          key: TESTMO_TOKEN
+    - name: GITHUB_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: x-compute-pytest-secrets
+          key: GITHUB_TOKEN
+    - name: JIRA_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: x-compute-pytest-secrets
+          key: JIRA_TOKEN
+    - name: JIRA_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: x-compute-pytest-secrets
+          key: JIRA_USERNAME
+    - name: HEAD_NODE_EC2_INSTANCE_ID
+      valueFrom:
+        configMapKeyRef:
+          name: x-compute-pytest-env-vars
+          key: HEAD_NODE_EC2_INSTANCE_ID
+    - name: PROFILE_NAME
+      valueFrom:
+        configMapKeyRef:
+          name: x-compute-pytest-env-vars
+          key: PROFILE_NAME
+    - name: CLUSTER_NAME
+      valueFrom:
+        configMapKeyRef:
+          name: x-compute-pytest-env-vars
+          key: CLUSTER_NAME
+    - name: HEAD_NODE_EC2_USERNAME
+      valueFrom:
+        configMapKeyRef:
+          name: x-compute-pytest-env-vars
+          key: HEAD_NODE_EC2_USERNAME
+    - name: TEST_NAME
+      valueFrom:
+        configMapKeyRef:
+          name: x-compute-pytest-env-vars
+          key: UI_TESTS               
+    ports:
+    - containerPort: 8080
+      name: http

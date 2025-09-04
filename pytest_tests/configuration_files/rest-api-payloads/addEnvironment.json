@@ -1,0 +1,43 @@
+{
+    "EnvName": "pytestEnv01",
+    "HeadAddress": "<HeadAddress>",
+    "K8s": {
+        "ClusterName": "guru-k8s"
+    },
+    "Pools": [
+        {
+            "PoolName": "pool-a",
+            "PoolSize": 10,
+            "ProfileName": "pytesteMgZ",
+            "VM": {
+                "CPUs": 2,
+                "ImageName": "k8s-131",
+                "MaxMemory": 4096,
+                "MinMemory": 4096,
+                "PrefixCount": 10,
+                "UserData": "",
+                "VolumeSize": 10
+            }
+        },
+        {
+            "PoolName": "pool-b",
+            "PoolSize": 10,
+            "ProfileName": "pytestProfile01",
+            "VM": {
+                "CPUs": 10,
+                "ImageName": "k8s-131",
+                "MaxMemory": 32500,
+                "MinMemory": 16900,
+                "PrefixCount": 3,
+                "UserData": "",
+                "VolumeSize": 10
+            }
+        }
+    ],
+    "Security": {
+        "User": "k8s",
+        "UserKeyPem": ""
+    },
+    "Type": "k8s",
+    "Id": "3efc0919-c640-4157-81b7-545e23c93ac5"
+}

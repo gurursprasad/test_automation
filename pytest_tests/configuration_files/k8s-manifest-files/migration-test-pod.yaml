@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: migration-test-pod
+spec:
+  tolerations:
+    - effect: NoSchedule
+      key: "exokarpenter.sh/x-compute"
+      operator: Exists
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: exokarpenter.sh/nodepool
+            operator: In
+            values:
+            - pool-a
+  containers:
+  - name: migration-test-container
+    image: ubuntu:latest
+    command: ["bash", "-c", "while true; do sleep 1000; done"]

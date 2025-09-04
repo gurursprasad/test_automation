@@ -1,0 +1,62 @@
+{
+    "AvailabilityZone": "us-east-2b",
+    "Controller": {
+      "IdentityRole": "arn:aws:iam::010438502665:instance-profile/xio-e2e-tests-08-21-xio-controller",
+      "InstanceTags": [
+        {
+          "Key": "exostellar.xspot-role",
+          "Value": "xspot-controller"
+        }
+      ],
+      "InstanceType": "c5.large",
+      "SecurityGroupIds": [
+        "sg-070f49dfe4b387b1a",
+        "sg-02142515465150c55",
+        "sg-04a2a3aac2d6599a0",
+        "sg-0ab0ea18e68b6e187"
+      ],
+      "SubnetId": "subnet-0409f48383b9189a0",
+      "VolumeSize": 100,
+      "ImageId": "ami-06428e55389b54532"
+    },
+    "EnableIO": true,
+    "LogPath": "/xcompute/logs",
+    "Manufacturer": "Intel",
+    "MaxControllers": 10,
+    "ProfileName": "az1",
+    "Region": "us-east-2",
+    "Worker": {
+      "IdentityRole": "arn:aws:iam::010438502665:instance-profile/xio-e2e-tests-08-21-xio-worker",
+      "InstanceTags": [
+        {
+          "Key": "exostellar.xspot-role",
+          "Value": "xspot-worker"
+        }
+      ],
+      "InstanceTypes": [
+        "m5:0",
+        "m6i:1"
+      ],
+      "SecurityGroupIds": [
+        "sg-070f49dfe4b387b1a",
+        "sg-02142515465150c55",
+        "sg-04a2a3aac2d6599a0",
+        "sg-0ab0ea18e68b6e187"
+      ],
+      "SpotFleetTypes": [
+        "m5:1",
+        "m5d:0",
+        "m6i:2"
+      ],
+      "SubnetId": "subnet-0409f48383b9189a0",
+      "ImageId": "ami-0b8c6b8057654c995"
+    },
+    "Xspot": {
+      "EnableHyperthreading": true,
+      "EnableBalloon": true
+    },
+    "XspotVersion": "xspot-3.2.3",
+    "Id": "ee1813ca-1f40-436d-8145-cc9d38f95eaf",
+    "NodeGroupName": "4nxnysfa",
+    "Status": "active"
+  }
