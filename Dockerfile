@@ -1,5 +1,5 @@
 # Use an official Python image as the base
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 # Set environment variables to reduce Python bytecode and buffer issues
 ENV PYTHONDONTWRITEBYTECODE=1

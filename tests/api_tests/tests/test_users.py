@@ -10,8 +10,8 @@ class Test_User_API:
     @pytest.fixture()
     def user_payload(self):
         return {
-            "name": "John Doe",
-            "email": "johndoe@gmail.com",
+            "name": "Guru Prasad",
+            "email": "gurursprasad06@gmail.com",
             "password": "password123"
         }
     def test_create_user(self, session, base_url, user_payload):

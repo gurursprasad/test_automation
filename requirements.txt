@@ -10,3 +10,5 @@ jira
 xlsxwriter
 pandas
 kubernetes
+responses
+jsonschema

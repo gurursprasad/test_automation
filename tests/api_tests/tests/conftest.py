@@ -1,4 +1,4 @@
-import pytest, yaml, requests, os
+import pytest, yaml, requests, os, responses
 
 
 @pytest.fixture(scope="session")
@@ -18,3 +18,9 @@ def session(config):
 @pytest.fixture(scope="session")
 def base_url(config):
     return config["base_url"]
+
+
+@pytest.fixture
+def mock_service_response():
+    with responses.RequestsMock() as resp:
+        yield resp
